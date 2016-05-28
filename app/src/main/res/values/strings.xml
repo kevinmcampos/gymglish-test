@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">GymglishTest</string>
+    <string name="app_name">Gymglish Websites</string>
+
+    <!-- Login -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="error_invalid_username">Use at least 3 characters.</string>
+    <string name="error_invalid_password">Use at least 8 characters. Include both an uppercase letter and a number.</string>
+    <string name="error_incorrect_username">This username does not exist</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
 </resources>
