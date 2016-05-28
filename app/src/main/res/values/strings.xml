@@ -13,4 +13,8 @@
 
     <!-- Website list -->
     <string name="action_logout">Logout</string>
+
+    <!-- Webview -->
+    <string name="action_share">Share</string>
+    <string name="action_copy_clipboard">Copy to clipboard</string>
 </resources>

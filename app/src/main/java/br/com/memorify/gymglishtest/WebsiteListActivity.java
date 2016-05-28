@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,7 +62,7 @@ public class WebsiteListActivity extends AppCompatActivity {
         websiteListAdapter.setWebsiteClickListener(new WebsiteListAdapter.WebsiteClickListener() {
             @Override
             public void onWebsiteClick(View view, Website website) {
-                Log.e(TAG, "Opening website " + website.getTitle() + " with URL " + website.getUrl());
+                WebViewActivity.startWebview(WebsiteListActivity.this, website);
             }
         });
         websiteListView.setAdapter(websiteListAdapter);
