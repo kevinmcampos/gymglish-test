@@ -10,4 +10,7 @@
     <string name="error_incorrect_username">This username does not exist</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+
+    <!-- Website list -->
+    <string name="action_logout">Logout</string>
 </resources>

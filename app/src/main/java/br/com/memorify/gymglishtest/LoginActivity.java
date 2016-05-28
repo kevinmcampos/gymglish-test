@@ -1,11 +1,12 @@
 package br.com.memorify.gymglishtest;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.View;
@@ -27,11 +28,11 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final List<Pair<String, String>> CREDENTIALS;
     static {
-        ArrayList<Pair<String, String>> credentialsList = new ArrayList<>();
-        credentialsList.add(new Pair<>("gymglish" , "Gymglish123"));
-        credentialsList.add(new Pair<>("kevin"    , "Kevin123"));
-        credentialsList.add(new Pair<>("admin"    , "admin123"));
-        CREDENTIALS = Collections.unmodifiableList(credentialsList);
+        ArrayList<Pair<String, String>> credentials = new ArrayList<>();
+        credentials.add(new Pair<>("gymglish" , "Gymglish123"));
+        credentials.add(new Pair<>("kevin"    , "Kevin123"));
+        credentials.add(new Pair<>("admin"    , "admin123"));
+        CREDENTIALS = Collections.unmodifiableList(credentials);
     }
 
     private EditText mUsernameView;
@@ -40,6 +41,10 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout mPasswordLayoutView;
     private View mProgressView;
     private Button mLoginButton;
+
+    public static void startLogin(Activity activity) {
+        activity.startActivity(new Intent(activity, LoginActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                Log.e(TAG, "You have successfully logged in.");
+                WebsiteListActivity.startWebsiteList(LoginActivity.this);
             } else {
                 if (mUserExist) {
                     mPasswordLayoutView.setError(getString(R.string.error_incorrect_password));
@@ -206,6 +211,14 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
             enableLogin(true);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
     }
 }
 
