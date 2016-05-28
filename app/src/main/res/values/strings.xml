@@ -16,5 +16,8 @@
 
     <!-- Webview -->
     <string name="action_share">Share</string>
+    <string name="share_message">Hey, checkout %1$s, it\'s amazing! %2$s</string>
     <string name="action_copy_clipboard">Copy to clipboard</string>
+
+
 </resources>

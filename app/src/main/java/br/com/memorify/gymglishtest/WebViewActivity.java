@@ -2,11 +2,15 @@ package br.com.memorify.gymglishtest;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +20,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.com.memorify.gymglishtest.model.Website;
 
@@ -123,10 +128,25 @@ public class WebViewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.share:
-                // TODO: Implement share action
+                shareUrl();
+                break;
             case R.id.copy_clipboard:
-                // TODO: Implement copy to clipboard
+                copyToClipboard();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void copyToClipboard() {
+        Toast.makeText(getBaseContext(), "URL has been copied to clipboard", Toast.LENGTH_LONG).show();
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Gymglish Websites", mInitialUrl);
+        clipboard.setPrimaryClip(clip);
+    }
+
+    private void shareUrl() {
+        ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setText(getString(R.string.share_message, mTitle, mInitialUrl))
+                .startChooser();
     }
 }
