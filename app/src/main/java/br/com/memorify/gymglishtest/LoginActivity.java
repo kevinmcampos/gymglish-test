@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         mUsernameLayoutView = (TextInputLayout) findViewById(R.id.username_input_layout);
         mPasswordLayoutView = (TextInputLayout) findViewById(R.id.password_input_layout);
         mProgressView = findViewById(R.id.login_progress);
-        mLoginButton = (Button) findViewById(R.id.email_sign_in_button);
+        mLoginButton = (Button) findViewById(R.id.sign_in_button);
     }
 
     private void setupViews() {
@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     private void tryLogin() {
         enableLogin(false);
 
-        String email = mUsernameView.getText().toString().trim();
+        String username = mUsernameView.getText().toString().trim();
         String password = mPasswordView.getText().toString().trim();
 
         boolean shouldCancel = false;
@@ -107,12 +107,12 @@ public class LoginActivity extends AppCompatActivity {
             mPasswordLayoutView.setError(null);
         }
 
-        // Validate email
-        if (TextUtils.isEmpty(email)) {
+        // Validate username
+        if (TextUtils.isEmpty(username)) {
             mUsernameLayoutView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             shouldCancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!isUsernameValid(username)) {
             mUsernameLayoutView.setError(getString(R.string.error_invalid_username));
             focusView = mUsernameView;
             shouldCancel = true;
@@ -125,12 +125,12 @@ public class LoginActivity extends AppCompatActivity {
             enableLogin(true);
         } else {
             showProgress(true);
-            new UserLoginTask(email, password).execute();
+            new UserLoginTask(username, password).execute();
         }
     }
 
-    private boolean isEmailValid(String email) {
-        return email.length() >= 3;
+    private boolean isUsernameValid(String username) {
+        return username.length() >= 3;
     }
 
     private boolean isPasswordValid(String password) {
@@ -164,8 +164,8 @@ public class LoginActivity extends AppCompatActivity {
         private final String mPassword;
         private boolean mUserExist = false;
 
-        UserLoginTask(String email, String password) {
-            mUsername = email;
+        UserLoginTask(String username, String password) {
+            mUsername = username;
             mPassword = password;
         }
 
